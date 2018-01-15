@@ -1,0 +1,48 @@
+.openBtn {
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 96px;
+  height: 38px;
+  color: #fff;
+  background: none;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  padding: 2px 16px;
+  background-color: #7289da;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #677bc4;
+  }
+
+  &:active {
+    outline: none;
+    background-color: #5b6eae;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.tabCounter {
+  width: 96px;
+  color: #72767d;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 2px 16px;
+  margin-top: 10px;
+  cursor: default;
+}

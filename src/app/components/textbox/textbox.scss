@@ -1,0 +1,12 @@
+.textbox {
+  align-self: center;
+  width: calc(95% - 20px);
+  height: calc(100% - 101px);
+  resize: none;
+  outline: none;
+  padding: 12px 10px;
+  border: 2px solid;
+  border-radius: 3px;
+  border-color: hsla(0,0%,100%,.2);
+  background-color: hsla(0,0%,100%,.06);
+}
