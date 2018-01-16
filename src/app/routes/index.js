@@ -1,15 +1,15 @@
-import { Route } from 'react-router'
-import { ApolloProvider } from 'react-apollo'
-import { ConnectedRouter } from 'react-router-redux'
-import { history, state } from '../services'
-import Home from './home/home'
+import { Provider } from "react-redux"
+import { ConnectedRouter } from "react-router-redux"
+import { store } from "@services"
+import { Directory } from "@routes/directory"
+import routes from "@routes/routes"
 
-console.log(state)
-
-export const Root = () => (
-  <ApolloProvider store={state} client={apollo.client}>
-    <ConnectedRouter history={history}>
-      <Route exact path="/" component={Home}/>
+const Root = () => (
+  <Provider store={store.state}>
+    <ConnectedRouter history={store.history}>
+      <Directory paths={routes} />
     </ConnectedRouter>
-  </ApolloProvider>
+  </Provider>
 )
+
+export default Root

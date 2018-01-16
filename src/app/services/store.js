@@ -1,27 +1,21 @@
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
-import { createLogger } from 'redux-logger'
-import { routerReducer, routerMiddleware, routerActions } from 'react-router-redux'
-//import { persistStore, autoRehydrate } from 'redux-persist'
-import createHistory from 'history/createBrowserHistory'
-import { apollo } from './apollo'
+import { createStore, combineReducers, compose, applyMiddleware } from "redux"
+import { createLogger } from "redux-logger"
+import { routerReducer, routerMiddleware, routerActions } from "react-router-redux"
+import createHistory from "history/createBrowserHistory"
 
 // TODO: Persisted storage works almost perfectly, except for Tab ID auto-incrementation
 // When implemented, the commented out lines can be added back in
 class Store {
   constructor() {
     this.history = createHistory()
-    // NOTE: Apollo isn't used in this project but it's included in the boilerplate for later use
-    this.apollo = apollo.client
     this.state = this.configureStore()
-    //persistStore(this.state)
-    this.state.dispatch({type: `INIT_STATE`})
+    this.state.dispatch({ type: `INIT_STATE` })
   }
 
   composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ routerActions }) || compose
 
   createReducer(asyncReducers) {
     return combineReducers({
-      apollo: this.apollo.reducer(),
       router: routerReducer,
       ...asyncReducers
     })
@@ -31,12 +25,7 @@ class Store {
     const loggerMiddleware = createLogger()
     const store = createStore(
       this.createReducer(),
-      this.composeEnhancers(
-        applyMiddleware(this.apollo.middleware()),
-        applyMiddleware(routerMiddleware(this.history)),
-        //autoRehydrate(),
-        applyMiddleware(loggerMiddleware)
-      )
+      this.composeEnhancers(applyMiddleware(routerMiddleware(this.history)), applyMiddleware(loggerMiddleware))
     )
     store.asyncReducers = {}
     return store
@@ -52,8 +41,11 @@ class Store {
   }
 }
 
-export const Reducer = Class => {
-  return class extends Class {
+// Export our store service as a singleton to be accessed anywhere within the application
+export const store = new Store()
+
+export const Reducer = Class =>
+  class extends Class {
     constructor(...args) {
       super(...args)
       this.addToStore()
@@ -64,7 +56,3 @@ export const Reducer = Class => {
       store.addReducer(name, this.reducer)
     }
   }
-}
-
-// Export our store service as a singleton to be accessed anywhere within the application
-export const store = new Store()

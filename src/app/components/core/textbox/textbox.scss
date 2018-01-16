@@ -1,0 +1,15 @@
+.textbox {
+  align-self: center;
+  width: calc(95% - 20px);
+  height: calc(100% - 101px);
+  padding: 12px 10px;
+  border: {
+    width: 2px;
+    color: hsla(0, 0%, 100%, 0.2);
+    style: solid;
+    radius: 3px;
+  }
+  background-color: hsla(0, 0%, 100%, 0.06);
+  outline: none;
+  resize: none; /* stylelint-disable-line */
+}

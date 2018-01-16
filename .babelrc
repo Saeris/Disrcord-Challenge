@@ -1,37 +1,114 @@
 {
-  "plugins": [
-    "react-hot-loader/babel"
-  ],
-  "presets": [
-    ["env", {
-      "targets": { "browsers": [ "last 2 versions", "not ie <= 11" ] },
-      "loose": true,
-      "modules": false,
-      "useBuiltIns": true
-    }],
-    "es2015",
-    "stage-0",
-    "react"
-  ],
   "env": {
-    "development": {
+    "test": {
+      "sourceMaps": "inline",
       "plugins": [
-        "transform-commonjs-es2015-modules",
-        "transform-object-rest-spread",
-        "transform-es2015-shorthand-properties",
-        "transform-function-bind"
+        "istanbul",
+        ["babel-plugin-webpack-alias", { "config": "./webpack.config.js"  }],
+        ["provide-modules", {
+          "core-js/fn/promise": "Promise",
+          "preact": [
+            "h"
+          ],
+          "react": [
+            "Component",
+            "React"
+          ],
+          "react-redux": [
+            "connect"
+          ],
+          "regenerator-runtime": "regeneratorRuntime",
+          "prop-types": "PropTypes"
+        }],
+        ["inline-replace-variables", {
+          "ENV": { "type": "node", "replacement": "process.env.NODE_ENV" }
+        }],
+        ["transform-react-jsx", { "pragma": "h" }],
+        ["react-css-modules", {
+          "filetypes": { ".scss": { "syntax": "postcss-scss" } },
+          "generateScopedName": "[local]_[hash:base64:5]",
+          "webpackHotModuleReloading": false
+        }]
+      ],
+      "presets": [
+        "babel-preset-power-assert",
+        ["env", {
+          "targets": { "node": "current" },
+          "useBuiltIns": "usage"
+        }],
+        "stage-0",
+        "flow"
       ]
     },
-    "node": {
+    "development": {
+      "plugins": [
+        ["provide-modules", {
+          "core-js/fn/promise": "Promise",
+          "preact": [
+            "h"
+          ],
+          "react": [
+            "Component",
+            "React"
+          ],
+          "react-redux": [
+            "connect"
+          ],
+          "regenerator-runtime": "regeneratorRuntime",
+          "prop-types": "PropTypes"
+        }],
+        ["babel-plugin-webpack-alias", { "config": "./webpack.config.js"  }],
+        ["inline-replace-variables", {
+          "ENV": { "type": "node", "replacement": "process.env.NODE_ENV" }
+        }],
+        ["transform-react-jsx", { "pragma": "h" }]
+      ],
       "presets": [
         ["env", {
-          "targets": { "node": 7 },
-          "loose": true,
-          "modules": "commonjs"
+          "targets": { "browsers": [ "last 2 versions", "not ie <= 11" ] },
+          "modules": false,
+          "useBuiltIns": "usage"
         }],
-        "es2015",
         "stage-0",
-        "react"
+        "flow"
+      ]
+    },
+    "production": {
+      "plugins": [
+        ["provide-modules", {
+          "core-js/fn/promise": "Promise",
+          "preact": [
+            "h"
+          ],
+          "react": [
+            "Component",
+            "React"
+          ],
+          "react-redux": [
+            "connect"
+          ],
+          "regenerator-runtime": "regeneratorRuntime",
+          "prop-types": "PropTypes"
+        }],
+        ["babel-plugin-webpack-alias", { "config": "./webpack.config.js"  }],
+        ["inline-replace-variables", {
+          "ENV": { "type": "node", "replacement": "process.env.NODE_ENV" }
+        }],
+        ["transform-react-jsx", { "pragma": "h" }],
+        ["transform-runtime", {
+          "helpers": false,
+          "polyfill": false,
+          "regenerator": true
+        }]
+      ],
+      "presets": [
+        ["env", {
+          "targets": { "browsers": [ "last 2 versions", "not ie <= 11" ] },
+          "modules": false,
+          "useBuiltIns": "usage"
+        }],
+        "stage-0",
+        "flow"
       ]
     }
   }

@@ -1,21 +1,23 @@
 .openBtn {
+  position: relative;
   display: flex;
   flex: 0 0 auto;
-  justify-content: center;
   align-items: center;
-  position: relative;
+  justify-content: center;
   width: 96px;
   height: 38px;
-  color: #fff;
-  background: none;
+  padding: 2px 16px;
   border: none;
   border-radius: 3px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 16px;
-  padding: 2px 16px;
-  background-color: #7289da;
   box-sizing: border-box;
+  line-height: 16px;
+  color: #fff;
+  background: none;
+  font: {
+    size: 14px;
+    weight: 500;
+  }
+  background-color: #7289da;
   cursor: pointer;
 
   &:hover {
@@ -23,8 +25,8 @@
   }
 
   &:active {
-    outline: none;
     background-color: #5b6eae;
+    outline: none;
   }
 
   &:focus {
@@ -33,16 +35,19 @@
 }
 
 .tabCounter {
-  width: 96px;
-  color: #72767d;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
   padding: 2px 16px;
   margin-top: 10px;
+  overflow: hidden;
+  line-height: 16px;
+  color: #72767d;
+  font: {
+    size: 12px;
+    weight: 500;
+  }
+  text: {
+    overflow: ellipsis;
+    transform: uppercase;
+  }
+  white-space: nowrap;
   cursor: default;
 }
